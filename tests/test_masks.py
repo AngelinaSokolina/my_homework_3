@@ -1,5 +1,5 @@
 import pytest
-from masks import get_mask_card_number, get_mask_account
+from src.masks import get_mask_card_number, get_mask_account
 
 """Тест для функции маскировки номера банковской карты"""
 @pytest.mark.parametrize("card_number, expected_card", [

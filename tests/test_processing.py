@@ -63,6 +63,3 @@ def test_sort_by_date_errors():
     with pytest.raises(KeyError):
         # Передаем список, где у одного словаря нет ключа 'date'
         sort_by_date([{'id': 1, 'date': '2023'}, {'id': 2}], reverse=True)
-
-
-
