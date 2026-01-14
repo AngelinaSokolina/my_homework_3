@@ -83,15 +83,15 @@ def test_sort_by_date_errors():
 def test_sort_by_date_executed_ascending(operation_data):
     # Pytest сам подставит сюда список из conftest.py
     result = sort_by_date(operation_data, False)
-    assert len(result) == 4
-    assert result[0]['id'] == 4
-    assert result[-1]['id'] == 3
+    assert len(result) == 5
+    assert result[0]['id'] == 5
+    assert result[-1]['id'] == 4
 
 def test_sort_by_date_executed_descending(operation_data):
     # Pytest сам подставит сюда список из conftest.py
     result = sort_by_date(operation_data, True)
     assert result[0]['id'] == 3
-    assert result[-1]['id'] == 4
+    assert result[-1]['id'] == 5
 
 def test_sort_empty(empty_list):
     # Pytest подставит пустой список []
