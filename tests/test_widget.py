@@ -2,6 +2,7 @@ import pytest
 
 from src.widget import mask_account_card, get_date
 
+# ______________БЛОК ТЕСТА С ДАННЫМИ ВВЕДЕННЫМИ ВРУЧНУЮ______________
 """Тест для функции, которая умеет обрабатывать информацию как о картах, так и о счетах"""
 @pytest.mark.parametrize("info, expected", [
     # 1. Проверка для карты (с названием)
@@ -20,6 +21,21 @@ def test_mask_account_card(info, expected):
     assert mask_account_card(info) == expected
 
 
+    # ______________БЛОК ТЕСТА С ФИКСТУРОЙ______________
+def test_mask_card_executed(clean_input_card):
+    result = mask_account_card(clean_input_card)
+    assert result == "Visa 4321 56** **** 5678"
+
+def test_complex_mask_card_executed(clean_complex_input_card):
+    result = mask_account_card(clean_complex_input_card)
+    assert result == "Maestro Gold 1234 56** **** 5678"
+
+
+def test_mask_account_executed(clean_input_account):
+    result = mask_account_card(clean_input_account)
+    assert result == "Счет **5640"
+
+# ______________БЛОК ТЕСТА С ДАННЫМИ ВВЕДЕННЫМИ ВРУЧНУЮ______________
 """Тест для функции, которая принимает на вход строку с датой и возвращает её в формате ДД.ММ.ГГГГ"""
 @pytest.mark.parametrize("string, expected_formatted_date", [
     # 1. Проверка корректности функции
@@ -38,3 +54,12 @@ def test_mask_account_card(info, expected):
 ])
 def test_get_date(string, expected_formatted_date):
     assert get_date(string) == expected_formatted_date
+
+    # ______________БЛОК ТЕСТА С ФИКСТУРОЙ______________
+def test_get_date_executed(date_verification):
+    result = get_date(date_verification)
+    assert result == "11.03.2024"
+
+def test_no_get_date_executed(no_date_verification):
+    result = get_date(no_date_verification)
+    assert result == ""

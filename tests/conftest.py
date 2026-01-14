@@ -1,5 +1,6 @@
 import pytest
 
+# _________________________________ДЛЯ test_processing_________________________________
 @pytest.fixture
 def operation_data():
     """Общая фикстура со списком для фильтрации и сортировки"""
@@ -15,6 +16,7 @@ def empty_list():
     """Фикстура для проверки пустого списка"""
     return []
 
+# _________________________________ДЛЯ test_masks_________________________________
 @pytest.fixture
 def standard_card_number():
     """Фикструра правильного ввода номера карты"""
@@ -34,3 +36,28 @@ def incorrect_input():
 def empty_input():
     """Фикстура для проверки пустого ввода"""
     return ""
+
+# _________________________________ДЛЯ test_widget_________________________________
+@pytest.fixture
+def clean_input_card():
+    """Фикструра правильного ввода номера и названия карты"""
+    return "Visa 4321567812345678"
+
+@pytest.fixture
+def clean_complex_input_card():
+    return "Maestro Gold 1234567812345678"
+
+@pytest.fixture
+def clean_input_account():
+    """Фикструра правильного ввода счета"""
+    return "Счет 43740123789432175640"
+
+@pytest.fixture
+def date_verification():
+    """Фикструра ввода даты"""
+    return "2024-03-11T02:26:18.671407"
+
+@pytest.fixture
+def no_date_verification():
+    """Фикструра отсутствия даты"""
+    return "4567щльд"
