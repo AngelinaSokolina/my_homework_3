@@ -80,13 +80,20 @@ def test_sort_by_date_errors():
 
 
 # ______________БЛОК ТЕСТА С ФИКСТУРОЙ______________
-def test_sort_by_date_executed(operation_data):
+def test_sort_by_date_executed_ascending(operation_data):
     # Pytest сам подставит сюда список из conftest.py
-    result = filter_by_state(operation_data, 'EXECUTED')
-    assert len(result) == 2
-    assert result[0]['id'] == 1
-    assert result[1]['id'] == 3
+    result = sort_by_date(operation_data, False)
+    assert len(result) == 4
+    assert result[0]['id'] == 4
+    assert result[-1]['id'] == 3
+
+def test_sort_by_date_executed_descending(operation_data):
+    # Pytest сам подставит сюда список из conftest.py
+    result = sort_by_date(operation_data, True)
+    assert result[0]['id'] == 3
+    assert result[-1]['id'] == 4
 
 def test_sort_empty(empty_list):
     # Pytest подставит пустой список []
-    assert filter_by_state(empty_list, 'EXECUTED') == []
+    assert sort_by_date(empty_list, True) == []
+    assert sort_by_date(empty_list, False) == []

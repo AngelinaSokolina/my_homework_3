@@ -1,6 +1,7 @@
 import pytest
 from src.masks import get_mask_card_number, get_mask_account
 
+# ______________БЛОК ТЕСТА С ДАННЫМИ ВВЕДЕННЫМИ ВРУЧНУЮ______________
 """Тест для функции маскировки номера банковской карты"""
 @pytest.mark.parametrize("card_number, expected_card", [
     # 1. Проверка правильности маскирования
@@ -27,6 +28,17 @@ from src.masks import get_mask_card_number, get_mask_account
 def test_mask_card(card_number, expected_card):
     assert get_mask_card_number(card_number) == expected_card
 
+    # ______________БЛОК ТЕСТА С ФИКСТУРОЙ______________
+    def test_mask_card_executed(operation_data):
+        # Pytest сам подставит сюда список из conftest.py
+        result = filter_by_state(operation_data, 'EXECUTED')
+        assert len(result) == 2
+        assert result[0]['id'] == 1
+        assert result[1]['id'] == 3
+
+    def test_filter_empty(empty_list):
+        # Pytest подставит пустой список []
+        assert filter_by_state(empty_list, 'EXECUTED') == []
 
     """Тест для функции маскировки номера банковского счета"""
 @pytest.mark.parametrize("account_number, expected_account", [
