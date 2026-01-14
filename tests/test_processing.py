@@ -3,6 +3,7 @@ import pytest
 
 from src.processing import filter_by_state, sort_by_date
 
+# ______________БЛОК ТЕСТА С ДАННЫМИ ВВЕДЕННЫМИ ВРУЧНУЮ______________
 """Тест для функции, которая фильтрует список словарей по значению ключа 'state'."""
 @pytest.mark.parametrize("data_filter, state_to_find, expected_filter", [
     # 1. Проверка правильности фильтра (Ожидаем СПИСОК с одним словарем)
@@ -27,7 +28,20 @@ from src.processing import filter_by_state, sort_by_date
 def test_filter_by_state(data_filter, state_to_find, expected_filter):
     assert filter_by_state(data_filter, state_to_find) == expected_filter
 
+# ______________БЛОК ТЕСТА С ФИКСТУРОЙ______________
+def test_filter_by_state_executed(operation_data):
+    # Pytest сам подставит сюда список из conftest.py
+    result = filter_by_state(operation_data, 'EXECUTED')
+    assert len(result) == 2
+    assert result[0]['id'] == 1
+    assert result[1]['id'] == 3
 
+def test_filter_empty(empty_list):
+    # Pytest подставит пустой список []
+    assert filter_by_state(empty_list, 'EXECUTED') == []
+
+
+# ______________БЛОК ТЕСТА С ДАННЫМИ ВВЕДЕННЫМИ ВРУЧНУЮ______________
 """
 Тест для функции сортировки списка словарей по ключу 'date'.
 По умолчанию сортировка идет от новых к старым (убывание).
@@ -63,3 +77,16 @@ def test_sort_by_date_errors():
     with pytest.raises(KeyError):
         # Передаем список, где у одного словаря нет ключа 'date'
         sort_by_date([{'id': 1, 'date': '2023'}, {'id': 2}], reverse=True)
+
+
+# ______________БЛОК ТЕСТА С ФИКСТУРОЙ______________
+def test_sort_by_date_executed(operation_data):
+    # Pytest сам подставит сюда список из conftest.py
+    result = filter_by_state(operation_data, 'EXECUTED')
+    assert len(result) == 2
+    assert result[0]['id'] == 1
+    assert result[1]['id'] == 3
+
+def test_sort_empty(empty_list):
+    # Pytest подставит пустой список []
+    assert filter_by_state(empty_list, 'EXECUTED') == []
