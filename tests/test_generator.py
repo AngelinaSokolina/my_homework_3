@@ -1,6 +1,6 @@
 import pytest
 from typing import Any, Dict, List
-from src.generators import filter_by_currency
+from src.generators import filter_by_currency, transaction_descriptions
 
 
 @pytest.fixture
@@ -36,6 +36,49 @@ def transactions() -> List[Dict[str, Any]]:
             "description": "Перевод со счета на счет",
             "from": "Счет 19708645243227258542",
             "to": "Счет 75651667383060284188"
+        },
+        {
+            "id": 8953151,
+            "state": "EXECUTED",
+            "date": "2018-02-22T12:08:58.425572",
+            "operationAmount": {
+                "amount": "2550.00",
+                "currency": {
+                    "name": "RUB",
+                    "code": "RUB"
+                }
+            },
+            "description": "Перевод со счета на счет",
+            "from": "Счет 12345678901234567890",
+            "to": "Счет 09876543210987654321"
+        },
+        {
+            "id": 5942234,
+            "state": "CANCELED",
+            "date": "2023-07-10T15:20:05.206878",
+            "operationAmount": {
+                "amount": "150.00",
+                "currency": {
+                    "name": "EUR",
+                    "code": "EUR"}
+            },
+            "description": "Перевод с карты на карту",
+            "from": "Visa Classic 1596448206136579",
+            "to": "MasterCard 1177661460596306"
+        },
+        {
+            "id": 1234567,
+            "state": "EXECUTED",
+            "date": "2024-01-01T00:00:01.000000",
+            "operationAmount": {
+                "amount": "50550.48",
+                "currency": {
+                    "name": "USD",
+                    "code": "USD"}
+            },
+            "description": "Перевод организации",
+            "from": "Счет 11112222333344445555",
+            "to": "Счет 99998888777766665555"
         }
     ]
 
@@ -53,3 +96,14 @@ def test_filter_by_currency(transactions: List[Dict[str, Any]]) -> None:
     second_transaction = next(result_transaction)
     assert second_transaction["operationAmount"]["currency"]["code"] == "USD"
     assert second_transaction["id"] == 142264268
+
+
+def test_transaction_descriptions(transactions: List[Dict[str, Any]]) -> None:
+    """Тест генератора по выводу операций"""
+    descriptions = transaction_descriptions(transactions)
+    # Проверяем каждое описание по порядку
+    assert next(descriptions) == "Перевод организации"
+    assert next(descriptions) == "Перевод со счета на счет"
+    assert next(descriptions) == "Перевод со счета на счет"
+    assert next(descriptions) == "Перевод с карты на карту"
+    assert next(descriptions) == "Перевод организации"
