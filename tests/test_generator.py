@@ -107,3 +107,9 @@ def test_transaction_descriptions(transactions: List[Dict[str, Any]]) -> None:
     assert next(descriptions) == "Перевод со счета на счет"
     assert next(descriptions) == "Перевод с карты на карту"
     assert next(descriptions) == "Перевод организации"
+
+
+def test_card_number_generator():
+    pass
+    # Заметка для преподавателя:
+    # Я не понимаю как написать тест для такого генератора
