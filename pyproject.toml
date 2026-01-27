@@ -1,9 +1,9 @@
 [project]
-name = "my-homework_5"
+name = "my-homework_6"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Angelina Sokolovskaya",email = "you@example.com"}
+    {name = "angelina",email = "you@example.com"}
 ]
 readme = "README.md"
 requires-python = ">=3.13"
