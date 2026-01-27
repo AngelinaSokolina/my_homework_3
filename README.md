@@ -55,7 +55,9 @@ result = sort_by_date(data, reverse=True)
 Для запуска проверок используйте:
 ```
 poetry run flake8 src
+poetry run flake8 tests
 poetry run mypy src
+poetry run mypy tests
 ```
 
 ## Как сохранить это на GitHub:
