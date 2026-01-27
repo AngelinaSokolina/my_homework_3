@@ -1,6 +1,6 @@
 import pytest
 from typing import Any, Dict, List
-from src.generators import filter_by_currency, transaction_descriptions
+from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
 
 
 @pytest.fixture
@@ -81,8 +81,8 @@ def test_transaction_descriptions(transactions: List[Dict[str, Any]]) -> None:
     assert next(descriptions) == "Перевод организации"
 
 
-# def test_card_number_generator():
-#     """Тест генератора диапозона карт"""
-#     pass
-    # Заметка для преподавателя:
-    # Я не понимаю как написать тест для такого генератора *слезы отчаяния*
+def test_card_number_generator():
+    """Тест генератора диапозона карт"""
+    expected_result = ["0000 0000 0000 0001", "0000 0000 0000 0002"]
+    result = card_number_generator(1, 2)
+    assert next(result) == expected_result[0]
